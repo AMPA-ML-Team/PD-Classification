@@ -94,7 +94,6 @@ def __main__(dataset_filename):
             preds = lr.predict(x_test)
             y_pred = np.round(preds)
             y_pred = pd.DataFrame(data={'id': ids, 'y': y_pred})
-            print(y_pred['y'].unique())
             pred.append(y_pred)
 
         pred = pd.concat(pred, axis=0).sort_values(by=['id'])['y']
@@ -106,7 +105,6 @@ def __main__(dataset_filename):
         # y2 = y.groupby(['id']).agg(
         #     lambda x: x.value_counts().index[0])
 
-        print(len(y2), len(pred))
         print(classification_report(y2, pred))
         print("ACCURACY =", accuracy_score(y2, pred))
         print("FSCORE =", f1_score(y2, pred))
